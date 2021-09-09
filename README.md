@@ -1,1 +1,1 @@
-# RepoDesignPattern
+# RepositoryDesignPattern
