@@ -1,17 +1,16 @@
 package org.qa.menu;
+
 import org.qa.utils.UserInput;
 
-public enum MenuOptions {
-	CREATE("Create a Vehicle to put in the garage"), 
-	READALL("Read a Vehicle from the garage"),
-	READBYID("Read a single by their ID"),
-	UPDATE("Update a Vehicle from the garage"),
-	DELETE("Delete a Vehicle from the garage"), 
-	EXIT("Exits the program");
+public enum TableOptions {
+	CAR("Make changes to the Car table"),
+	MOTORBIKE("Make changes to the Motorbike table"),
+	TRUCK("Make changes to the Truck table"),
+	EXIT("Exit the program");
 	
 	private String description;
 	
-	MenuOptions(String description) {
+	TableOptions(String description) {
 		this.description = description;
 	}
 	
@@ -20,18 +19,18 @@ public enum MenuOptions {
 	}
 	
 	public static void printActions() {
-		for(MenuOptions options: MenuOptions.values()) {
+		for(TableOptions options: TableOptions.values()) {
 			System.out.println(options.getDescription());
 		}
 	}
 	
-	public static MenuOptions pickOption(UserInput input) {
-		MenuOptions option;
+	public static TableOptions pickOption(UserInput input) {
+		TableOptions option;
 		while(true) {
 			try {
 				System.out.println("Please make a selection");
 				String choice = input.getString();
-				option = MenuOptions.valueOf(choice.toUpperCase());
+				option = TableOptions.valueOf(choice.toUpperCase());
 				break;
 			} catch (IllegalArgumentException e) {
 				System.out.println("Invalid selection");
@@ -39,18 +38,5 @@ public enum MenuOptions {
 		}
 		return option;
 	}
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

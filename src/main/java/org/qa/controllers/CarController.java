@@ -10,7 +10,7 @@ public class CarController implements Controller<Car> {
 	
 	private UserInput input = UserInput.getInstance();
 	
-	CarDAO dao = new CarDAO();
+	private CarDAO dao = new CarDAO();
 	
 	@Override
 	public Car create() {
@@ -37,20 +37,38 @@ public class CarController implements Controller<Car> {
 
 	@Override
 	public List<Car> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.readAll();
 	}
 
 	@Override
 	public Car readByID() {
-		// TODO Auto-generated method stub
-		return null;
+		for(Car car: dao.readAll()) {
+			System.out.println("ID="+car.getID());
+		}
+		System.out.println("Which ID to view?");
+		int id = input.getInt();
+		return dao.readByID(id);
 	}
 
 	@Override
 	public Car update() {
-		// TODO Auto-generated method stub
-		return null;
+		for(Car car: dao.readAll()) {
+			System.out.println(car);
+		}
+		
+		System.out.println("Please select a car to edit");
+		int id = input.getInt();
+		Car car = dao.readByID(id);
+		
+		System.out.println(car);
+		System.out.println("What is the new maker of the car?");
+		car.setMaker(input.getString());
+		System.out.println("What is the new colour?");
+		car.setColour(input.getString());
+		System.out.println("How many wheels?");
+		car.setWheels(input.getInt());
+		System.out.println("How many doors?");
+		car.setDoors(input.getInt());
+		return dao.update(car);
 	}
-
 }

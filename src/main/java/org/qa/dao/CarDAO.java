@@ -75,12 +75,25 @@ public class CarDAO implements Dao<Car> {
 	}
 
 	public Car update(Car t) {
-		// TODO Auto-generated method stub
+		try(Statement stmt = db.getStatement();) {
+			stmt.executeUpdate("update car set maker='"+t.getMaker()+"','colour="
+					+t.getColour()+"',wheels="
+					+t.getWheels()+",doors="
+					+t.getDoors()+" where ID = "
+					+t.getID());
+			return readByID(t.getID());
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public int delete(long id) {
-		// TODO Auto-generated method stub
+		try(Statement stmt = db.getStatement();) {
+			return stmt.executeUpdate("delete from car where ID ="+id);	
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
